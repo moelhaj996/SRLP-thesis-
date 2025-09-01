@@ -1,0 +1,35 @@
+COMPREHENSIVE STATISTICAL ANALYSIS REPORT
+Analysis: pqs by strategy
+============================================================
+
+1. ASSUMPTION CHECKING:
+   Normality: ✗
+   Equal variances: ✗
+   Balanced design: ✗
+
+2. PRIMARY STATISTICAL TEST:
+   Test used: Kruskal-Wallis
+   H-statistic: 9091.1737
+   p-value: 0.000000 ***
+   Significant: Yes
+
+3. POST-HOC ANALYSIS:
+   Method: Tukey HSD
+
+4. PAIRWISE EFFECT SIZES (Cohen's d):
+   srlp vs cot: d=1.378 (large)
+   srlp vs tot: d=0.957 (large)
+   srlp vs react: d=1.063 (large)
+   cot vs tot: d=-0.433 (small)
+   cot vs react: d=-0.317 (small)
+   tot vs react: d=0.115 (negligible)
+
+5. DESCRIPTIVE STATISTICS:
+   cot: M=66.62, SD=11.98, n=11745
+           95% CI: [66.40, 66.84]
+   react: M=70.40, SD=11.88, n=8505
+           95% CI: [70.16, 70.66]
+   srlp: M=82.75, SD=11.42, n=11836
+           95% CI: [82.55, 82.97]
+   tot: M=71.75, SD=11.60, n=6435
+           95% CI: [71.48, 72.03]

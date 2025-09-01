@@ -1,0 +1,44 @@
+
+# Environment variables and secrets
+.env
+.env.local
+.env.backup
+*.env.backup
+
+# API keys and sensitive files
+api_keys.txt
+secrets.txt
+credentials.json
+
+# Python cache and temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+.coverage
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Results and temporary directories
+test_*/
+tmp/
+temp/
+logs/
+*.log
