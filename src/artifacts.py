@@ -539,12 +539,12 @@ Strategy & SCCS & IIR & CEM & PQS \\\\
         ax1.set_xlabel('AI Provider', fontweight='bold', fontsize=18)
         ax1.set_title('Average Execution Time by Provider', fontweight='bold')
         
-        # Fix provider label readability - rotate and increase font size
-        ax1.tick_params(axis='x', labelsize=16, rotation=45)
-        ax1.tick_params(axis='y', labelsize=14)
+        # Fix provider label readability - rotate more and increase font size
+        ax1.tick_params(axis='x', labelsize=18, rotation=60)  # Increased rotation and font size
+        ax1.tick_params(axis='y', labelsize=16)
         
         # Set y-axis to start at 0 for fairness
-        ax1.set_ylim(0, max(times) * 1.3 if times else 1)  # Extra space for rotated labels
+        ax1.set_ylim(0, max(times) * 1.5 if times else 1)  # More space for rotated labels
         
         # Add value labels on bars (larger, bold)
         for bar, time, std in zip(bars1, times, time_stds):
@@ -577,12 +577,12 @@ Strategy & SCCS & IIR & CEM & PQS \\\\
         ax2.set_xlabel('AI Provider', fontweight='bold', fontsize=18)
         ax2.set_title('Total Cost by Provider', fontweight='bold')
         
-        # Fix provider label readability - rotate and increase font size
-        ax2.tick_params(axis='x', labelsize=16, rotation=45)
-        ax2.tick_params(axis='y', labelsize=14)
+        # Fix provider label readability - rotate more and increase font size
+        ax2.tick_params(axis='x', labelsize=18, rotation=60)  # Increased rotation and font size
+        ax2.tick_params(axis='y', labelsize=16)
         
         # Set y-axis to start at 0 for fairness
-        ax2.set_ylim(0, max(costs) * 1.3 if costs else 1)  # Extra space for rotated labels
+        ax2.set_ylim(0, max(costs) * 1.5 if costs else 1)  # More space for rotated labels
         
         # Add value labels on bars (larger, bold)
         for bar, cost, std in zip(bars2, costs, cost_stds):
@@ -969,6 +969,10 @@ Iteration & Mean PQS & CI Low & CI High \\\\
         # Create scatter plot
         colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff']
         
+        # Calculate medians for quadrant-based positioning
+        median_cost = np.median(x_costs)
+        median_pqs = np.median(y_pqs)
+        
         for i, data in enumerate(aggregated):
             color = colors[i % len(colors)]
             ax.scatter(data['cost_mean'], data['pqs_mean'], s=sizes[i], 
@@ -988,22 +992,37 @@ Iteration & Mean PQS & CI Low & CI High \\\\
             # Use shorter labels with better positioning to avoid overlap
             label_text = f"{provider_short}-{strategy_short}"
             
-            # Vary annotation positions to reduce overlap
-            offset_x = 20 + (i % 3) * 10  # Stagger x positions
-            offset_y = 15 + (i // 3) * 8  # Stagger y positions
+            # Smart quadrant-based positioning to avoid overlap
+            x_pos = data['cost_mean']
+            y_pos = data['pqs_mean']
+            
+            # Determine quadrant and set appropriate offset
+            if x_pos <= median_cost and y_pos >= median_pqs:  # Top-left
+                offset_x, offset_y = -60, 20
+                ha = 'right'
+            elif x_pos > median_cost and y_pos >= median_pqs:  # Top-right
+                offset_x, offset_y = 30, 20
+                ha = 'left'
+            elif x_pos <= median_cost and y_pos < median_pqs:  # Bottom-left
+                offset_x, offset_y = -60, -30
+                ha = 'right'
+            else:  # Bottom-right
+                offset_x, offset_y = 30, -30
+                ha = 'left'
+            
+            # Add small variation to prevent exact overlap
+            offset_x += (i % 3) * 5
+            offset_y += (i % 3) * 5
             
             ax.annotate(label_text, 
                        (data['cost_mean'], data['pqs_mean']),
                        xytext=(offset_x, offset_y), textcoords='offset points', 
-                       fontsize=12, fontweight='bold', ha='left',
-                       bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.9, 
-                                edgecolor='gray', linewidth=0.5),
-                       arrowprops=dict(arrowstyle='->', color='black', lw=1.2, alpha=0.8))
+                       fontsize=14, fontweight='bold', ha=ha,
+                       bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.95, 
+                                edgecolor='gray', linewidth=0.8),
+                       arrowprops=dict(arrowstyle='->', color='black', lw=1.5, alpha=0.9))
         
-        # Add reference lines (medians)
-        median_cost = np.median(x_costs)
-        median_pqs = np.median(y_pqs)
-        
+        # Add reference lines (medians) - already calculated above
         ax.axvline(x=median_cost, color='gray', linestyle=':', alpha=0.6, label='Median Cost')
         ax.axhline(y=median_pqs, color='gray', linestyle=':', alpha=0.6, label='Median PQS')
         
@@ -1013,19 +1032,22 @@ Iteration & Mean PQS & CI Low & CI High \\\\
             if len(pareto_points) > 1:
                 pareto_costs = [p['cost_mean'] for p in pareto_points]
                 pareto_pqs = [p['pqs_mean'] for p in pareto_points]
-                ax.plot(pareto_costs, pareto_pqs, 'k--', alpha=0.8, linewidth=3, label='Pareto Frontier')
+                ax.plot(pareto_costs, pareto_pqs, 'k--', alpha=0.8, linewidth=4, label='Pareto Frontier')
         
-        # Styling
-        ax.set_xlabel('Mean Cost (USD)', fontsize=12)
-        ax.set_ylabel('Mean PQS', fontsize=12)
-        ax.set_title('Cost–Quality Trade-off by Provider and Strategy', fontsize=14, fontweight='bold')
+        # Enhanced styling with larger fonts
+        ax.set_xlabel('Mean Cost (USD)', fontsize=16, fontweight='bold')
+        ax.set_ylabel('Mean PQS', fontsize=16, fontweight='bold')
+        ax.set_title('Cost–Quality Trade-off by Provider and Strategy', fontsize=18, fontweight='bold')
         
         # Set limits and grid
         ax.set_ylim(0, 100)
         ax.set_xlim(0, max(x_costs) * 1.1)
         ax.grid(True, axis='y', alpha=0.2)
         
-        ax.legend(bbox_to_anchor=(1.02, 1), loc='upper left')
+        # Increase tick label sizes for better readability
+        ax.tick_params(axis='both', labelsize=14)
+        
+        ax.legend(bbox_to_anchor=(1.02, 1), loc='upper left', fontsize=12)
         
         plt.tight_layout()
         
