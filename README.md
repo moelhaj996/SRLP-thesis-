@@ -15,92 +15,22 @@ This pipeline evaluates **4 reasoning strategies** across **5 domains** using **
 
 ```mermaid
 graph TD
-    A["SRLP Thesis Project"] --> B["Data Input"]
-    A --> C["Configuration"]
-    A --> D["AI Providers"]
+    A["Input: 450 Scenarios"] --> B["4 AI Strategies"]
+    B --> C["3 AI Providers"]
+    C --> D["5,400 Experiments"]
+    D --> E["Evaluate Performance"]
+    E --> F["Statistical Analysis"]
+    F --> G["Generate Results"]
+    G --> H["Thesis Output"]
     
-    B --> B1["450 Scenarios"]
-    B --> B2["5 Domains"]
-    B --> B3["3 Complexity Levels"]
-    
-    C --> C1["API Keys (.env)"]
-    C --> C2["Pipeline Config"]
-    C --> C3["Random Seeds"]
-    
-    D --> D1["GPT-4"]
-    D --> D2["Claude-3"] 
-    D --> D3["Gemini"]
-    
-    B1 --> E["Strategy Execution"]
-    B2 --> E
-    B3 --> E
-    D1 --> E
-    D2 --> E
-    D3 --> E
-    C1 --> E
-    C2 --> E
-    C3 --> E
-    
-    E --> E1["SRLP<br/>Self-Refinement"]
-    E --> E2["CoT<br/>Chain-of-Thought"]
-    E --> E3["ToT<br/>Tree-of-Thoughts"]
-    E --> E4["ReAct<br/>Reasoning+Acting"]
-    
-    E1 --> F["Evaluation & Metrics"]
-    E2 --> F
-    E3 --> F
-    E4 --> F
-    
-    F --> F1["PQS<br/>Plan Quality Score"]
-    F --> F2["SCCS<br/>Strategic Cognitive Capabilities"]
-    F --> F3["IIR<br/>Implementation Integration"]
-    F --> F4["CEM<br/>Cognitive Efficiency"]
-    
-    F1 --> G["Statistical Analysis"]
-    F2 --> G
-    F3 --> G
-    F4 --> G
-    
-    G --> G1["ANOVA Testing<br/>Welchs ANOVA"]
-    G --> G2["Effect Sizes<br/>Cohens d"]
-    G --> G3["Bootstrap CI<br/>B=2000 samples"]
-    G --> G4["Post-hoc Tests<br/>Bonferroni correction"]
-    
-    G1 --> H["Results & Outputs"]
-    G2 --> H
-    G3 --> H
-    G4 --> H
-    
-    H --> H1["CSV Results<br/>38,521 evaluations"]
-    H --> H2["LaTeX Tables<br/>8 publication tables"]
-    H --> H3["Publication Figures<br/>12 high-quality plots"]
-    H --> H4["Statistical Reports<br/>Comprehensive analysis"]
-    
-    H1 --> I["Thesis Outputs"]
-    H2 --> I
-    H3 --> I
-    H4 --> I
-    
-    I --> I1["Enhanced PQS Distribution<br/>Violin plots + Effect sizes"]
-    I --> I2["Ablation Study<br/>Component analysis"]
-    I --> I3["Human Validation<br/>r=0.85 correlation"]
-    I --> I4["Computational Efficiency<br/>Cost-benefit analysis"]
-    
-    I1 --> J["Publication Ready"]
-    I2 --> J
-    I3 --> J
-    I4 --> J
-    
-    J --> J1["Thesis Defense<br/>Quality: 9.2/10"]
-    J --> J2["Journal Submission<br/>Large effect sizes d>0.8"]
-    J --> J3["Conference Presentation<br/>300 DPI figures"]
-    
-    style A fill:#2E86AB,stroke:#fff,stroke-width:3px,color:#fff
-    style E fill:#A23B72,stroke:#fff,stroke-width:2px,color:#fff
-    style F fill:#F18F01,stroke:#fff,stroke-width:2px,color:#fff
-    style G fill:#C73E1D,stroke:#fff,stroke-width:2px,color:#fff
-    style I fill:#2ECC71,stroke:#fff,stroke-width:2px,color:#fff
-    style J fill:#E74C3C,stroke:#fff,stroke-width:3px,color:#fff
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#ffebee
+    style E fill:#e8f5e8
+    style F fill:#fff8e1
+    style G fill:#f1f8e9
+    style H fill:#e3f2fd
 ```
 
 ### 🔍 Key Features Highlighted in Architecture:
