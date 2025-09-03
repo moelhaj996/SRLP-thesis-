@@ -1,6 +1,6 @@
 # SRLP Thesis Evaluation Pipeline
 
-A comprehensive evaluation system for the Strategic Reasoning and Learning Progression (SRLP) framework against established baseline strategies across multiple AI providers.
+Self-Refinement for LLM Planners via Self-Checking Feedback (SRLP) framework against established baseline strategies across multiple AI providers.
 
 ## 🎯 Overview
 
@@ -243,18 +243,6 @@ All baseline strategies (CoT, ToT, ReAct) use prompts and techniques from the or
 - 450 scenarios across 5 diverse domains
 - Exactly 90 scenarios per domain with deterministic generation
 - Complex scenarios with varying difficulty levels
-
-### Robust Execution
-- Exponential backoff retry logic for API failures
-- Real-time progress monitoring
-- Automatic checkpointing for resume capability
-- Comprehensive error handling
-
-### Publication-Ready Outputs
-- LaTeX tables formatted for academic papers
-- High-resolution figures (300 DPI)
-- Statistical analysis and comparisons
-- Professional summary reports
 
 ## 📊 Expected Results
 
