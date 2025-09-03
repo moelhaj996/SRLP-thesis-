@@ -1,0 +1,146 @@
+Rebuild the full evaluation pipeline for my thesis from scratch with these exact requirements:
+
+🔧 Core Setup
+
+Create a clean project structure:
+
+src/ → all modules (providers, strategies, metrics, pipeline, outputs)
+
+run_evaluation.py → main entry script
+
+requirements.txt → dependencies
+
+README.md → setup + usage instructions
+
+results_full/ → output directory
+
+Add secure .env config for API keys (OpenAI GPT-4, Anthropic Claude-3, Google Gemini).
+
+Manage exactly 450 scenarios (90 per domain) across:
+
+travel_planning
+
+software_project
+
+event_organization
+
+research_study
+
+business_launch
+
+🤖 Providers
+
+Integrate 3 cloud providers:
+
+GPT-4 (OpenAI)
+
+Claude-3 (Anthropic)
+
+Gemini (Google)
+
+Keep modular to swap/add later.
+
+🧠 Strategies
+
+Implement 4 reasoning strategies:
+
+SRLP (Self-Refinement for LLM Planners): 4 stages (Plan Generation, Self-Assessment, Refinement, Quality Assurance).
+
+CoT (Chain-of-Thought) → must use real prompts from Wei et al. (2022).
+
+ToT (Tree-of-Thoughts) → must use real branching prompts from Yao et al. (2024).
+
+ReAct → must use real reasoning + acting prompts from Yao et al. (2022).
+
+⚠️ Important: If these baselines (CoT, ToT, ReAct) are missing, search the internet (papers, GitHub, Hugging Face, repos) for existing prompts or implementations and integrate them properly. Do not use placeholders. I need actual working baselines to compare against SRLP.
+
+📊 Metrics
+
+Implement and log:
+
+PQS (Plan Quality Score)
+
+SCCS (Self-Check Confidence Score)
+
+IIR (Iteration Improvement Rate)
+
+CEM (Cost Efficiency Metric)
+
+Execution time & cost
+
+📈 Outputs
+
+Generate results in multiple formats:
+
+CSV → raw results
+
+JSON → detailed logs
+
+LaTeX tables (ready for Chapter 4):
+
+PQS by strategy & provider
+
+Provider performance (time & cost)
+
+Domain-level SRLP gains vs baselines
+
+PQS by complexity (low/med/high)
+
+SCCS by dimension
+
+Figures (PNG):
+
+PQS distribution by strategy
+
+Time & cost by provider
+
+Domain gains by strategy
+
+PQS by complexity level
+
+SCCS by dimension
+
+🚀 Execution
+
+Dry-run mode → enumerate tasks only. Must show:
+
+Providers: 3 (gpt4, claude3, gemini)
+Strategies: 4 (srlp, cot, tot, react)
+Domains: 5
+Scenarios: 450
+Total experiments: 5,400
+
+
+Async execution with batching & checkpointing.
+
+Resume support: --resume-from auto.
+
+Real-time logs every 60s.
+
+✅ Acceptance Criteria
+
+All 4 strategies run with real CoT/ToT/ReAct baselines (fetched from internet sources).
+
+Tables must show valid numbers (not 0.0 or NaN).
+
+Figures must include all strategies and providers.
+
+🎯 Next Steps for You
+
+Rebuild the pipeline fully from scratch.
+
+Search the internet for real CoT, ToT, and ReAct implementations/prompts and integrate them into the strategies.
+
+Ensure the CLI can run full experiments:
+
+python run_evaluation.py \
+  --providers gpt4,claude3,gemini \
+  --strategies srlp,cot,tot,react \
+  --async \
+  --workers 8 \
+  --batch-size 300 \
+  --log-level INFO \
+  --resume-from auto
+
+
+Expected total: 5,400 experiments with complete LaTeX tables and figures ready for my thesis.

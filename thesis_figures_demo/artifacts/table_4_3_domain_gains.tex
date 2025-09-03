@@ -1,0 +1,19 @@
+% Requires: \usepackage{booktabs,multirow}
+\begin{table}[htbp]
+\centering
+\caption{SRLP Performance Gains by Domain}
+\label{tab:domain_gains}
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Domain} & \multicolumn{2}{c}{vs CoT} & \multicolumn{2}{c}{vs ToT} & \multicolumn{2}{c}{vs ReAct} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+ & ΔPQS & Gain (\%) & ΔPQS & Gain (\%) & ΔPQS & Gain (\%) \\
+\midrule
+Travel Planning & 10.2 & 13.8 & 13.3 & 18.8 & 15.6 & 22.9 \\
+Software Project & 10.7 & 14.6 & 12.9 & 18.1 & 15.8 & 23.2 \\
+Event Organization & 10.3 & 13.9 & 13.5 & 19.2 & 14.7 & 21.3 \\
+Research Study & 9.5 & 12.9 & 12.5 & 17.6 & 14.7 & 21.4 \\
+Business Launch & 9.6 & 12.9 & 12.8 & 18.0 & 15.4 & 22.5 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -307,14 +307,11 @@ The pipeline includes comprehensive validation:
 ## 📖 Citation
 
 ```bibtex
-@misc{srlp_evaluation_2024,
-  title={Strategic Reasoning and Learning Progression: A Comprehensive Evaluation Framework},
-  author={[Your Name]},
-  year={2024},
+@misc{srlp_evaluation_2025,
+  title={Self-Refinement for LLM Planners via Self-Checking Feedback},
+  author={[Mohamed ElhajSuliman Elnaim Suliman]},
+  year={03.09.2025},
   note={Thesis Evaluation Pipeline - 5,400 experiments across 3 AI providers}
 }
 ```
 
----
-
-**Ready for thesis Chapter 4 with complete LaTeX tables and figures!** 🎓
