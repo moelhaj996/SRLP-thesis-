@@ -14,23 +14,45 @@ This pipeline evaluates **4 reasoning strategies** across **5 domains** using **
 ## 🔄 System Architecture
 
 ```mermaid
-graph TD
-    A["Input: 450 Scenarios"] --> B["4 AI Strategies"]
-    B --> C["3 AI Providers"]
-    C --> D["5,400 Experiments"]
-    D --> E["Evaluate Performance"]
-    E --> F["Statistical Analysis"]
-    F --> G["Generate Results"]
-    G --> H["Thesis Output"]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#fff3e0
-    style D fill:#ffebee
-    style E fill:#e8f5e8
-    style F fill:#fff8e1
-    style G fill:#f1f8e9
-    style H fill:#e3f2fd
+%% Title: Four-Stage Self-Refinement Model
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#000000",
+    "primaryColor": "#111111",
+    "tertiaryColor": "#111111",
+    "primaryTextColor": "#ffffff",
+    "primaryBorderColor": "#ffffff",
+    "lineColor": "#ffffff",
+    "clusterBkg": "#000000",
+    "fontFamily": "Inter, Arial, sans-serif"
+  }
+}}%%
+flowchart LR
+
+    %% Nodes (use \n for line breaks)
+    PG(["Plan\nGeneration\n\nInitial plans are created\nusing LLM knowledge"])
+    SA(["Self-\nAssessment\n\nPlans are reviewed and\nfeedback is generated"])
+    QA(["Quality\nAssurance\n\nRefinements are evaluated\nfor genuine improvements"])
+    RF(["Refinement\n\nPlans are improved based\non feedback"])
+
+    %% Invisible positioning links to force 2×2 grid
+    PG --- QA
+    SA --- RF
+
+    %% Loop arrows (right, down, left, up)
+    PG --> SA
+    SA --> RF
+    RF --> QA
+    QA --> PG
+
+    %% Styling (rounded rect vibe + white strokes/text)
+    classDef bw fill:#111111,stroke:#ffffff,color:#ffffff,stroke-width:1.5px;
+    class PG,SA,QA,RF bw;
+
+    %% Hide the positioning link lines
+    linkStyle 0,1 stroke:transparent,opacity:0;
+
 ```
 
 ### 🔍 Key Features Highlighted in Architecture:
