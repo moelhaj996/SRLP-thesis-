@@ -14,45 +14,68 @@ This pipeline evaluates **4 reasoning strategies** across **5 domains** using **
 ## 🔄 System Architecture
 
 ```mermaid
-%% Title: Four-Stage Self-Refinement Model
 %%{init: {
   "theme": "base",
   "themeVariables": {
-    "background": "#000000",
-    "primaryColor": "#111111",
-    "tertiaryColor": "#111111",
+    "background": "#fafafa",
+    "primaryColor": "#2563eb",
     "primaryTextColor": "#ffffff",
-    "primaryBorderColor": "#ffffff",
-    "lineColor": "#ffffff",
-    "clusterBkg": "#000000",
-    "fontFamily": "Inter, Arial, sans-serif"
+    "primaryBorderColor": "#1e40af",
+    "lineColor": "#374151",
+    "secondaryColor": "#f3f4f6",
+    "tertiaryColor": "#e5e7eb",
+    "clusterBkg": "#f9fafb",
+    "clusterBorder": "#d1d5db",
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "fontSize": "14px"
   }
 }}%%
-flowchart LR
 
-    %% Nodes (use \n for line breaks)
-    PG(["Plan\nGeneration\n\nInitial plans are created\nusing LLM knowledge"])
-    SA(["Self-\nAssessment\n\nPlans are reviewed and\nfeedback is generated"])
-    QA(["Quality\nAssurance\n\nRefinements are evaluated\nfor genuine improvements"])
-    RF(["Refinement\n\nPlans are improved based\non feedback"])
+flowchart TD
+    subgraph SRLP ["🔄 SRLP Framework: Self-Refinement for LLM Planners"]
+        direction TB
 
-    %% Invisible positioning links to force 2×2 grid
-    PG --- QA
-    SA --- RF
+        subgraph Stage1 ["📋 Stage 1: Plan Generation"]
+            PG["🎯 Initial Plan Creation<br/>• Leverage LLM domain knowledge<br/>• Generate comprehensive plans<br/>• Establish baseline solutions"]
+        end
 
-    %% Loop arrows (right, down, left, up)
-    PG --> SA
-    SA --> RF
-    RF --> QA
-    QA --> PG
+        subgraph Stage2 ["🔍 Stage 2: Self-Assessment"]
+            SA["📊 Critical Plan Evaluation<br/>• Identify potential weaknesses<br/>• Generate constructive feedback<br/>• Assess completeness & feasibility"]
+        end
 
-    %% Styling (rounded rect vibe + white strokes/text)
-    classDef bw fill:#111111,stroke:#ffffff,color:#ffffff,stroke-width:1.5px;
-    class PG,SA,QA,RF bw;
+        subgraph Stage3 ["⚡ Stage 3: Iterative Refinement"]
+            RF["🛠️ Plan Enhancement<br/>• Apply feedback systematically<br/>• Address identified gaps<br/>• Optimize solution quality"]
+        end
 
-    %% Hide the positioning link lines
-    linkStyle 0,1 stroke:transparent,opacity:0;
+        subgraph Stage4 ["✅ Stage 4: Quality Assurance"]
+            QA["🎖️ Validation & Verification<br/>• Evaluate improvements<br/>• Ensure genuine enhancement<br/>• Prevent degradation"]
+        end
+    end
 
+    %% Primary flow arrows with enhanced styling
+    PG -->|"Generate Initial Plan"| SA
+    SA -->|"Provide Feedback"| RF
+    RF -->|"Apply Improvements"| QA
+    QA -->|"Iterate if Needed"| PG
+
+    %% Feedback loop annotation
+    QA -.->|"Convergence Check"| FINAL["🏆 Final Optimized Plan"]
+
+    %% Stage styling
+    classDef stageBox fill:#2563eb,stroke:#1e40af,color:#ffffff,stroke-width:2px
+    classDef processBox fill:#10b981,stroke:#059669,color:#ffffff,stroke-width:2px,font-weight:bold
+    classDef finalBox fill:#dc2626,stroke:#b91c1c,color:#ffffff,stroke-width:3px,font-weight:bold
+
+    class Stage1,Stage2,Stage3,Stage4 stageBox
+    class PG,SA,RF,QA processBox
+    class FINAL finalBox
+
+    %% Link styling
+    linkStyle 0 stroke:#10b981,stroke-width:3px
+    linkStyle 1 stroke:#10b981,stroke-width:3px
+    linkStyle 2 stroke:#10b981,stroke-width:3px
+    linkStyle 3 stroke:#f59e0b,stroke-width:3px,stroke-dasharray: 5 5
+    linkStyle 4 stroke:#dc2626,stroke-width:2px,stroke-dasharray: 3 3
 ```
 
 ### 🔍 Key Features Highlighted in Architecture:
